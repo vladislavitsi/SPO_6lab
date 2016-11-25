@@ -3,11 +3,13 @@ package com.spo6lab;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.Date;
 
 /**
  * Created by Владислав on 11/25/2016.
  */
 public class Process{
+    private Date date;
     private int numb;
     private String message;
     private JLabel titleStatus;
@@ -17,7 +19,6 @@ public class Process{
     private JLabel inbox;
     private JLabel time;
     private JPanel panel;
-    private boolean recived = false;
 
     /**
      * Конструктор класса Процесс, принимает его порядковый номер и личное сообщение
@@ -48,7 +49,8 @@ public class Process{
         this.status.setFont(fontN);
         this.inbox = new JLabel("Не было входящих сообщений");
         this.inbox.setFont(fontN);
-        this.time = new JLabel("");
+        date = new Date(System.currentTimeMillis());
+        this.time = new JLabel(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
         this.time.setFont(fontN);
         //Добавление текстовых полей на панель
         this.panel.add(this.titleStatus);
@@ -64,20 +66,23 @@ public class Process{
         else panel.setBackground(Color.white);
     }
 
+    public void setReceiver(boolean isReceiver){
+        if (isReceiver) panel.setBackground(Color.green);
+        else panel.setBackground(Color.white);
+    }
 
     public void getMessage(String message, int numb) {
-        this.recived = true;
-        this.status.setText("Получил сообщение от " + numb + " процесса");
+        this.date = new Date(System.currentTimeMillis());
+        this.time.setText(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+        this.status.setText("#"+numb+" -> прислал");
         this.inbox.setText(message);
     }
 
     public String sendMessage(int numb) {
+        this.date = new Date(System.currentTimeMillis());
+        this.time.setText(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
         this.status.setText("Отправленно -> #"+numb);
         return this.message;
-    }
-
-    public int getNumb() {
-        return numb;
     }
 
     public JPanel getPanel() {

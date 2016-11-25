@@ -1,7 +1,6 @@
 package com.spo6lab;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -30,7 +29,7 @@ public class GUI {
 
         for(int i=0;i<Manager.COUNT;i++){
             try {
-                manager[i] = new Process(i, "Привет о процесса #"+i, new JPanel());
+                manager[i] = new Process(i, "Привет от процесса #"+i, new JPanel());
                 panel.add(manager[i].getPanel());
                 frame.setVisible(true);
                 Thread.sleep(Manager.CREATEINTERRUPT);
