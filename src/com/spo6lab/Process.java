@@ -12,11 +12,9 @@ public class Process{
     private String message;
     private JLabel titleStatus;
     private JLabel titleInbox;
-    private JLabel titleOutbox;
     private JLabel titleTime;
     private JLabel status;
     private JLabel inbox;
-    private JLabel outbox;
     private JLabel time;
     private JPanel panel;
     private boolean recived = false;
@@ -44,16 +42,12 @@ public class Process{
         this.titleStatus.setFont(fontB);
         this.titleInbox = new JLabel("Входящее: ");
         this.titleInbox.setFont(fontB);
-        this.titleOutbox = new JLabel("Исходящее: ");
-        this.titleOutbox.setFont(fontB);
         this.titleTime = new JLabel("Время: ");
         this.titleTime.setFont(fontB);
         this.status = new JLabel("Процесс #"+this.numb+" создан");
         this.status.setFont(fontN);
         this.inbox = new JLabel("Не было входящих сообщений");
         this.inbox.setFont(fontN);
-        this.outbox = new JLabel("Не было исходящих сообщений");
-        this.outbox.setFont(fontN);
         this.time = new JLabel("");
         this.time.setFont(fontN);
         //Добавление текстовых полей на панель
@@ -63,17 +57,22 @@ public class Process{
         this.panel.add(this.time);
         this.panel.add(this.titleInbox);
         this.panel.add(this.inbox);
-        this.panel.add(this.titleOutbox);
-        this.panel.add(this.outbox);
     }
-/*
-    public void getMessage(int numb, String message) {
+
+    public void setActive(boolean isActive){
+        if (isActive) panel.setBackground(Color.yellow);
+        else panel.setBackground(Color.white);
+    }
+
+
+    public void getMessage(String message, int numb) {
         this.recived = true;
-        this.Status = "Получил сообщение от " + numb + " процесса: ";
-        this.mail = message;
+        this.status.setText("Получил сообщение от " + numb + " процесса");
+        this.inbox.setText(message);
     }
-*/
-    public String sendMessage() {
+
+    public String sendMessage(int numb) {
+        this.status.setText("Отправленно -> #"+numb);
         return this.message;
     }
 

@@ -12,8 +12,12 @@ public class GUI {
     private JPanel panel;
     private JFrame frame;
 
-
-    public void go(Process manager[]){
+    /**
+     * Конструктор класса GUI инициализирующий графический интерфейс
+     * и инициализирующий создание процессов
+     * @param manager
+     */
+    public GUI(Process manager[]) {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
@@ -24,23 +28,28 @@ public class GUI {
         frame.setSize(1200,600);
         frame.setVisible(true);
 
-        for(int i=0;i<9;i++){
+        for(int i=0;i<Manager.COUNT;i++){
             try {
-                manager[i] = new Process(i, "Привет о процесса "+i, new JPanel());
+                manager[i] = new Process(i, "Привет о процесса #"+i, new JPanel());
                 panel.add(manager[i].getPanel());
                 frame.setVisible(true);
-                Thread.sleep(500);
+                Thread.sleep(Manager.CREATEINTERRUPT);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        manager[5].getPanel().setBackground(Color.yellow);
         frame.setContentPane(panel);
         frame.setVisible(true);
     }
 
-
-
+    public void update(){
+        frame.setVisible(true);
+        try {
+            Thread.sleep(Manager.GOINTERRUPT);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public JPanel getPanel() {
         return panel;
